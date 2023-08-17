@@ -1,0 +1,66 @@
+Method 1: Recursive Approach
+#include <stdio.h>
+
+int recursiveF(int n) {
+    if (n <= 2) return 1;
+    return recursiveF(n - 3) + recursiveF(n - 2);
+}
+
+int main() {
+    int inputN = 7;  // Example value of n
+    
+    printf("F(%d) = %d\n", inputN, recursiveF(inputN));
+    
+    return 0;
+}
+
+
+Method 2: Memoization (Top-Down Dynamic Programming)
+#include <stdio.h>
+
+#define MAX_N 100
+int memo[MAX_N];
+
+int memoizedF(int n) {
+    if (n <= 2) return 1;
+    if (memo[n] != -1) return memo[n];
+    
+    memo[n] = memoizedF(n - 3) + memoizedF(n - 2);
+    return memo[n];
+}
+
+int main() {
+    int inputN = 7;  // Example value of n
+    
+    for (int i = 0; i < MAX_N; i++) memo[i] = -1;
+    
+    printf("F(%d) = %d\n", inputN, memoizedF(inputN));
+    
+    return 0;
+}
+
+
+Method 3: Iterative Approach (Bottom-Up Dynamic Programming
+
+#include <stdio.h>
+
+int iterativeF(int n) {
+    if (n <= 2) return 1;
+    
+    int prevPrev = 1, prev = 1, current;
+    for (int i = 3; i <= n; i++) {
+        current = prevPrev + prev;
+        prevPrev = prev;
+        prev = current;
+    }
+    
+    return prev;
+}
+
+int main() {
+    int inputN = 7;  // Example value of n
+    
+    printf("F(%d) = %d\n", inputN, iterativeF(inputN));
+    
+    return 0;
+}
